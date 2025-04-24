@@ -32,10 +32,12 @@ We have 3 distribution :
 
 What we want to compute is : $P(Z|X) = \frac{P(Z,X)}{P(X)} = \frac{P(X|Z)P(Z)}{\int_ZP(X,z)dz}$ but $\int_ZP(X,z)dz$ is not tractable, because we will need to compute it for every value of $Z$, the latter can be highly dimentional. \
 So the solution is to approximate the "posterior" with another distribution : $Q(Z)$.
-\
-We made an approcimation in the **"Posterior"** phase, we want to measure the error of this approximation :
-$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(Z|X)log\frac{Q(Z|X)}{P(Z|X)}$$
-
+\\
+To mesure the error that we will make from this approximation we will use the Kulback Leibler divergence : 
+$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z|X)}$$\\
+It tells us the amount of information in bits needed to distore $Q$ to $P$.
+\\
+$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)P(X)}{P(z,X)} = \sum_{z \in Z} Q(z|X)\left[log\frac{Q(z|X)}{P(z,X)} + log P(X)\right] $$
 By computation we get :
 
 $$log(P(X)) = \mathcal{L} + KL(Q(Z|X)||P(Z|X))$$
