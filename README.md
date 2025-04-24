@@ -30,7 +30,11 @@ We have 3 distribution :
 * $P(Z|X)$ **"Posterior"** "probability of obtaining Z from X. Probability for the encoder. It will be approximated by a gaussian distribution : $Q(Z|X)$ because $P(Z|X)$ is not known.
 * $P(X|Z)$ **"Reconstruction"** "probability of obtaining X by decoding Z", Probability of the decoder. 
 
-What we want to compute is : $P(Z|X) = \frac{P(Z,X)}{P(X)} = \frac{P(X|Z)P(Z)}{\int_ZP(X,z)dz}$ but $\int_ZP(X,z)dz$ is not tractable, because we will need to compute it for every value of $Z$, the latter can be highly dimentional. 
+What we want to compute is : 
+
+$$P(Z|X) = \frac{P(Z,X)}{P(X)} = \frac{P(X|Z)P(Z)}{\int_ZP(X,z)dz}$$
+
+but $\int_ZP(X,z)dz$ is not tractable, because we will need to compute it for every value of $Z$, the latter can be highly dimentional. 
 
 So the solution is to approximate the "posterior" with another distribution : $Q(Z)$.
 
@@ -41,6 +45,20 @@ $$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z|X)}$$
 It tells us the amount of information in bits needed to distore $Q$ to $P$.
 
 $$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)P(X)}{P(z,X)} = \sum_{z \in Z} Q(z|X)\left[log\frac{Q(z|X)}{P(z,X)} + log P(X)\right] $$
+
+$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + \sum_{z \in Z} Q(z|X)log P(X)$$
+
+
+$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + log P(X)\sum_{z \in Z} Q(z|X)$$
+
+
+$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + log P(X)$$
+
+On the equation above, the first term is the term that we will want to minimize.
+
+
+
+
 
 By computation we get :
 
