@@ -40,21 +40,23 @@ So the solution is to approximate the "posterior" with another distribution : $Q
 
 To mesure the error that we will make from this approximation we will use the Kulback Leibler divergence : 
 
-$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z|X)}$$
+$$KL(Q(Z|X) | P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z|X)}$$
 
 It tells us the amount of information in bits needed to distore $Q$ to $P$.
 
-$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)P(X)}{P(z,X)} = \sum_{z \in Z} Q(z|X)\left[log\frac{Q(z|X)}{P(z,X)} + log P(X)\right] $$
+$$KL(Q(Z|X) | P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)P(X)}{P(z,X)} = \sum_{z \in Z} Q(z|X)\left[log\frac{Q(z|X)}{P(z,X)} + log P(X)\right] $$
 
-$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + \sum_{z \in Z} Q(z|X)log P(X)$$
-
-
-$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + log P(X)\sum_{z \in Z} Q(z|X)$$
+$$KL(Q(Z|X) | P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + \sum_{z \in Z} Q(z|X)log P(X)$$
 
 
-$$KL(Q(Z|X) || P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + log P(X)$$
+$$KL(Q(Z|X) | P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + log P(X)\sum_{z \in Z} Q(z|X)$$
 
-On the equation above, the first term is the term that we will want to minimize.
+
+$$KL(Q(Z|X) | P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + log P(X)$$
+
+On the equation above, the first term is the term that we will want to minimize. So let's focus on this first term :
+
+$$\sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} = \mathbb{E}_{Q(Z|x)}\left[log\frac{Q(Z|x)}{P(Z,x)}\right]$$
 
 
 
