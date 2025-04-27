@@ -83,7 +83,7 @@ $$\mathcal{L} = \mathbb{E}_{Q(Z|x)}\left[log P(x|Z) \right] - KL\left(Q(Z|X)||P(
 
 With what we had earlier we then have : 
 
-$$KL(Q(Z|x)||P(Z|X)) = log P(X) - \mathcal{L} = log P(X) - \left(\mathbb{E}_{Q(Z|X)} \left[log P(X|Z) - KL(Q(Z|X)||P(Z))\right]$$
+$$KL(Q(Z|x)||P(Z|X)) = log P(X) - \mathcal{L} = log P(X) - \left(\mathbb{E}_{Q(Z|X)} \left[log P(X|Z) - KL(Q(Z|X)||P(Z)) \right]\right)$$
 
 So :
 
