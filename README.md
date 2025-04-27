@@ -81,22 +81,21 @@ $$\mathcal{L} = \mathbb{E}_{Q(Z|X)}\left[log P(X|Z)\right] + \sum_Z Q(Z|X) log \
 
 $$\mathcal{L} = \mathbb{E}_{Q(Z|x)}\left[log P(x|Z) \right] - KL\left(Q(Z|X)||P(Z)\right)$$
 
+With what we had earlier we then have : 
 
-By computation we get :
+$$KL(Q(Z|x)||P(Z|X)) = log P(X) - \mathcal{L} = log P(X) - \left(\mathbb{E}_{Q(Z|X)} \left[log P(X|Z) - KL(Q(Z|X)||P(Z))\right]$$
 
-$$log(P(X)) = \mathcal{L} + KL(Q(Z|X)||P(Z|X))$$
+So :
 
-With $\mathcal{L}$ that is the **variational lower bound**, and it's opposit : $-\mathcal{L}$ that is our loss function.
+$$log P(X) = \mathcal{L} + KL(Q(Z|X)||P(Z|x))$$
 
-We want to maximize $log(P(X))$ that is negative, so maximize $\mathcal{L}$(négatif) thus minizing $-\mathcal{L}$(positif). More precisely, minimizing :
+We want to maximize $log P(X)$, which is the log likelihood of the data. And $\mathcal{L}$ is the lowerbond of $logP(X)$. If $\mathcal{L}$ increases, the better you describe your data, because $P(X)$ increases. So we want to maximize the $\mathcal{L}$ term.
 
-\\
-$$- \mathcal{L} = - \mathbb{E}_{Q(Z|X)}[log(P(X|Z)] + KL(Q(Z|X)||P(Z))$$
+$$\mathcal{L} = \mathbb{E}_{Q(Z|X)} \left[log P(X|Z) \right] - KL (Q(Z|X)||P(Z))$$
 
-\
-* $\mathbb{E}_{Q(Z|X)}[log(P(X|Z)]$ : is the reconsrtuction error, in our case it is the MSE (Mean Squarred Error) :
-\\
-* $KL(Q(Z|X)||P(Z))$ : is the regularization, the KL loss (Kulback Leibler). In our case since $P(Z)$ is a normal law, the KL loss can be written as :
+The first term is negative, it reprsents the reconstruction error in our case it will be the MSE. The second term is the regularization term.
+
+
 $$KL(Q(Z|X)||\mathcal{N}(0,1)) = - \frac{1}{2}\left[-\sigma_q^2 - \mu_q^2 + 1 + log(\sigma_q^2)\right]$$
 
 Reparametrisation trick :
