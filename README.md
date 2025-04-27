@@ -58,10 +58,9 @@ On the equation above, the first term is the term that we will want to minimize.
 
 $$\sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} = \mathbb{E}_{Q(Z|x)}\left[log\frac{Q(Z|x)}{P(Z,x)}\right]$$
 
-$$
-\mathbb{E}_{Q(Z|X)}\left[ \log \frac{Q(Z|X)}{P(X, S)} \right] 
-= \mathbb{E}_{Q(Z|X)}\left[ \log Q(Z|X) - \log P(X|Z) - \log P(Z) \right]
-$$
+$$\mathbb{E}_{Q(Z|X)} \left[ \log \frac{Q(Z|X)}{P(X, S)} \right]  $$ 
+
+$$ \mathbb{E}_{Q(Z|X)} \left[ \log Q(Z|X) - \log P(X|Z) - \log P(Z) \right]$$
 
 
 We want to minimize this term, so maximize the opposit :
