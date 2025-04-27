@@ -58,7 +58,11 @@ On the equation above, the first term is the term that we will want to minimize.
 
 $$\sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} = \mathbb{E}_{Q(Z|x)}\left[log\frac{Q(Z|x)}{P(Z,x)}\right]$$
 
-$$\mathbb{E}_{Q(Z|x)} \left[log\frac{Q(Z|x)}{P(S,x)}\right] = \mathbb{E}_{Q(Z|x)} \left[logQ(Z|x) - logP(x|Z) - logP(Z)\right] $$
+$$
+\mathbb{E}_{Q(Z|X)}\left[ \log \frac{Q(Z|X)}{P(X, S)} \right] 
+= \mathbb{E}_{Q(Z|X)}\left[ \log Q(Z|X) - \log P(X|Z) - \log P(Z) \right]
+$$
+
 
 We want to minimize this term, so maximize the opposit :
 
@@ -69,7 +73,11 @@ $\mathcal{L}$ is the variational lower bond.
 
 Moreover : 
 
-$$\mathcal{L} = \mathbb{E}_{Q(Z|X)}\left[logP(X|Z) + log\frac{P(Z)}{Q(Z|X)}\right] = \mathbb{E}_{Q(Z|X)}log P(X|Z) + \sum_Z Q(z|X)log\frac{P(z)}{Q(Z|x)}$$
+$$
+\mathcal{L} = \mathbb{E}_{Q(Z|X)}\left[ \log P(X|Z) + \log \frac{P(Z)}{Q(Z|X)} \right] 
+= \mathbb{E}_{Q(Z|X)}\left[\log P(X|Z)\right] + \sum_Z Q(Z|X)\log \frac{P(Z)}{Q(Z|X)}
+$$
+
 
 $$\mathcal{L} = \mathbb{E}_{Q(Z|x)}\left[log P(x|Z) \right] - KL\left(Q(Z|X)||P(Z)\right)$$
 
