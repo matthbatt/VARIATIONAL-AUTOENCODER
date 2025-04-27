@@ -73,6 +73,7 @@ $\mathcal{L}$ is the variational lower bond.
 
 Moreover : 
 
+$$\mathcal{L} = \mathbb{E}_{Q(Z|X)} \left[log P(X|Z) + log\frac{P(Z)}{Q(Z|X)}\right]$$
 $$
 \mathcal{L} = \mathbb{E}_{Q(Z|X)} \left[ log P(X|Z) + log \frac{P(Z)}{Q(Z|X)} \right] 
 = \mathbb{E}_{Q(Z|X)}\left[log P(X|Z)\right] + \sum_Z Q(Z|X) log \frac{P(Z)}{Q(Z|X)}
