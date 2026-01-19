@@ -1,8 +1,5 @@
 # Generating financial senarios with a variational autoencoder to compute risk metrics
 
-This project implements a **Variational Autoencoder (VAE)** — a type of generative model and We will use this VAE to generate financial senarios to compute risk metrics like the Value at risk
-
-
 ## What is a Variational Autoencoder?
 
 A **VAE** is a probabilistic version of the traditional autoencoder. Instead of mapping inputs to fixed points in latent space, it maps them to a distribution — typically a Gaussian — allowing for sampling and smooth interpolation between data points.
