@@ -53,19 +53,14 @@ We have 3 distribution :
 What we want to compute is the true posterior:
 
 
-\[
-P(Z \mid X) = \frac{P(Z,X)}{P(X)} 
-= \frac{P(X \mid Z)\,P(Z)}{\int_Z P(X,z)\,dz}.
-\]
+$$P(Z \mid X) = \frac{P(Z,X)}{P(X)} 
+= \frac{P(X \mid Z)\,P(Z)}{\int_Z P(X,z)\,dz}$$
 
 
 
 However, the term
 
-
-\[
-\int_Z P(X,z)\,dz
-\]
+$$\int_Z P(X,z)\,dz$$
 
 
 is intractable, because it requires integrating over all possible values of $Z$, which is typically high-dimensional.
@@ -75,86 +70,68 @@ To bypass this difficulty, we introduce an approximate posterior distribution $Q
 To measure how close this approximation is to the true posterior, we use the Kullback--Leibler divergence:
 
 
-\[
-KL\!\left(Q(Z\mid X)\,\|\,P(Z\mid X)\right)
-= \int Q(z\mid X)\,\log\frac{Q(z\mid X)}{P(z\mid X)}\,dz.
-\]
-
-
+$$KL\!\left(Q(Z\mid X)\,\|\,P(Z\mid X)\right)
+= \int Q(z\mid X)\,\log\frac{Q(z\mid X)}{P(z\mid X)}\,dz$$
 
 Expanding the true posterior inside the logarithm:
 
+$$KL(Q\|P)
+= \int Q(z\mid X)\,\log\frac{Q(z\mid X)P(X)}{P(z,X)}\,dz$$
 
-\[
-KL(Q\|P)
-= \int Q(z\mid X)\,\log\frac{Q(z\mid X)P(X)}{P(z,X)}\,dz.
-\]
-
-
-
-
-
-\[
-= \int Q(z\mid X)\left[\log\frac{Q(z\mid X)}{P(z,X)} + \log P(X)\right]dz.
-\]
-
-
+$$
+= \int Q(z\mid X)\left[\log\frac{Q(z\mid X)}{P(z,X)} + \log P(X)\right]dz$$
 
 Since $Q$ is a probability distribution,
 
-
-\[
-\int Q(z\mid X)\,dz = 1,
-\]
-
+$$\int Q(z\mid X)\,dz = 1,$$
 
 we obtain:
 
 
-\[
+$$
 KL(Q(Z\mid X)\,\|\,P(Z\mid X))
 = \int Q(z\mid X)\log\frac{Q(z\mid X)}{P(z,X)}\,dz + \log P(X).
-\]
+$$
 
 
 
 The first term is the one we want to minimize. Let us focus on it:
 
 
-\[
+$$
 \int Q(z\mid X)\log\frac{Q(z\mid X)}{P(z,X)}\,dz
 = \mathbb{E}_{Q(Z\mid X)}\!\left[\log\frac{Q(Z\mid X)}{P(Z,X)}\right].
-\]
+$$
 
 
 
 Using the factorization $P(Z,X)=P(X\mid Z)P(Z)$:
 
 
-\[
+$$
 \mathbb{E}_{Q(Z\mid X)}\!\left[\log Q(Z\mid X) - \log P(X\mid Z) - \log P(Z)\right].
-\]
+$$
 
 
 
 We now introduce the variational lower bound (ELBO) by maximizing the negative of this expression:
 
 
-\[
+$$
 \mathcal{L}
 = \mathbb{E}_{Q(Z\mid X)}\!\left[\log P(X\mid Z) + \log\frac{P(Z)}{Q(Z\mid X)}\right].
-\]
+$$
 
 
 
 This can be rewritten as:
 
 
-\[
+$$
 \mathcal{L}
 = \mathbb{E}_{Q(Z\mid X)}[\log P(X\mid Z)]
 - KL\!\left(Q(Z\mid X)\,\|\,P(Z)\right).
-\]
+$$
 
 
 
@@ -163,26 +140,26 @@ The first term is the reconstruction term, and the second term is a regularizati
 From the earlier identity:
 
 
-\[
+$$
 KL(Q(Z\mid X)\,\|\,P(Z\mid X)) = \log P(X) - \mathcal{L},
-\]
+$$
 
 
 we obtain:
 
 
-\[
+$$
 \log P(X) = \mathcal{L} + KL(Q(Z\mid X)\,\|\,P(Z\mid X)).
-\]
+$$
 
 
 
 Since the KL divergence is always non-negative:
 
 
-\[
+$$
 \mathcal{L} \le \log P(X),
-\]
+$$
 
 
 so $\mathcal{L}$ is indeed a lower bound on the log-likelihood.
@@ -192,13 +169,13 @@ Thus, maximizing $\mathcal{L}$ increases $\log P(X)$, meaning the model better e
 Finally, the VAE objective is:
 
 
-\[
+$$
 \boxed{
 \mathcal{L}
 = \mathbb{E}_{Q(Z\mid X)}[\log P(X\mid Z)]
 - KL\!\left(Q(Z\mid X)\,\|\,P(Z)\right)
 }
-\]
+$$
 
 
 
