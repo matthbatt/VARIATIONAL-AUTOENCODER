@@ -156,8 +156,8 @@ and the second term is the KL regularization term.
 For a Gaussian latent distribution, the KL divergence has a closed form:
 
 $$
-KL\ \left(Q(Z\mid X)\,\|\,\mathcal{N}(0,1)\right)
-= -\frac{1}{2}\left(1 + \log(\sigma_q^2) - \mu_q^2 - \sigma_q^2\right).
+KL\ \left(Q(Z\mid X)\ \|\ \mathcal{N}(0,1)\right)
+= -\frac{1}{2}\left(1 + \log(\sigma_q^2) - \mu_q^2 - \sigma_q^2\right)
 $$
 
 
