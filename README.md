@@ -1,9 +1,9 @@
 # Generating financial senarios with a variational autoencoder to compute risk metrics
 
 ## Why bother with risk metrics ?
-Financial institutions are routinely exposed to a wide range of risks, including credit risk, operational risk, and market risk. On financial markets, assets and instruments are traded continuously, and their values fluctuate in response to global events, making them inherently difficult to predict. To mitigate these market risks, financial regulators impose quantitative thresholds that institutions must respect. One of the most fundamental of these measures is the Value at Risk (VaR). \\
+Financial institutions are routinely exposed to a wide range of risks, including credit risk, operational risk, and market risk. On financial markets, assets and instruments are traded continuously, and their values fluctuate in response to global events, making them inherently difficult to predict. To mitigate these market risks, financial regulators impose quantitative thresholds that institutions must respect. One of the most fundamental of these measures is the Value at Risk (VaR). \
         
-The concept of VaR emerged in the late 1980s and gained prominence in the early 1990s, notably through the work of J.P. Morgan, which formalized and popularized the methodology within its RiskMetrics framework. VaR later became a cornerstone of regulatory risk management and was incorporated into the Basel II and Basel III frameworks as a standard measure for assessing market risk exposure. \\
+The concept of VaR emerged in the late 1980s and gained prominence in the early 1990s, notably through the work of J.P. Morgan, which formalized and popularized the methodology within its RiskMetrics framework. VaR later became a cornerstone of regulatory risk management and was incorporated into the Basel II and Basel III frameworks as a standard measure for assessing market risk exposure. \
         
 Mathematically, VaR is derived by analyzing the distribution of an asset’s historical returns over a chosen time horizon. Taking the 5th percentile of the worst returns yields a VaR with a 95\% confidence level, while the 1st percentile corresponds to a 99\% confidence VaR. In practical terms, VaR indicates that the asset's value is not expected to decline by more than a certain amount over Y days, with a confidence level of 95\% or 99\%. It therefore provides a probabilistic estimate of extreme losses under normal market conditions, and serves as a key benchmark for both internal risk assessment and regulatory compliance.
 
@@ -16,7 +16,7 @@ In this project, we investigate whether a deep learning model, specifically a Va
 
 ## What is a Variational Autoencoder?
 
-A **VAE** is a probabilistic version of the traditional autoencoder. Instead of mapping inputs to fixed points in latent space, it maps them to a distribution — typically a Gaussian — allowing for sampling and smooth interpolation between data points.
+A Variational Autoencoder (VAE) is a probabilistic extension of the traditional autoencoder. Its architecture has the shape of an hourglass, with a narrow bottleneck called the latent space. Instead of mapping inputs to fixed points in latent space, it maps them to a distribution — typically a Gaussian — allowing for sampling and smooth interpolation between data points.
 
 The key components are:
 
