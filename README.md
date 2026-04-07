@@ -160,45 +160,26 @@ KL\!\left(Q(Z\mid X)\,\|\,\mathcal{N}(0,1)\right)
 = -\frac{1}{2}\left(1 + \log(\sigma_q^2) - \mu_q^2 - \sigma_q^2\right).
 $$
 
-\bigskip
 
 ## Reparameterization trick
 During backpropagation, we need to compute gradients, which requires all operations
 to be differentiable. However, sampling
-$$
-Z \sim \mathcal{N}(\mu_q, \sigma_q^2)
-$$
+
+$$ Z \sim \mathcal{N}(\mu_q, \sigma_q^2)$$
+
 is not differentiable with respect to $\mu_q$ and $\sigma_q$.
 
 To make $Z$ differentiable, we rewrite the sampling step as:
 
-$$
-Z = \mu_q + \sigma_q\,\epsilon,
-$$
+$$ Z = \mu_q + \sigma_q\ \epsilon $$
 
 where
 
-$$
-\epsilon \sim \mathcal{N}(0,1).
-$$
+$$ \epsilon \sim \mathcal{N}(0,1) $$
 
 In this form, the randomness is isolated in $\epsilon$, and $Z$ becomes a differentiable
 function of $(\mu_q, \sigma_q)$, allowing gradients to flow through the latent variable.
 
 
-
-
-
-
-The first term corresponds to the reconstruction error (in practice: MSE or cross-entropy),  
-and the second term is the KL regularization term. For a gaussian distribution, the 
-
-$$KL(Q(Z|X)||\mathcal{N}(0,1)) = - \frac{1}{2}\left[-\sigma_q^2 - \mu_q^2 + 1 + log(\sigma_q^2)\right]$$
-
-Reparametrisation trick :
-In the back propagation process, we need to compute a gradient, thus diffecienting a function.
-How to differenciate Z, which has been generated with $\mathcal{N}(\mu_q,\sigma_q^2)$ ?
-
-The trick is the generate Z $\mu_q + \sigma_q^2 \epsilon$ where $\epsilon$ is a nomal law $\mathcal{N}(0,1)$. In this way Z becomes differenciable
 
 
