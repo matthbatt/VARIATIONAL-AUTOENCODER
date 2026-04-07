@@ -72,7 +72,7 @@ To bypass this difficulty, we introduce an approximate posterior distribution $Q
 To measure how close this approximation is to the true posterior, we use the Kullback--Leibler divergence:
 
 
-$$KL\left(Q(Z\mid X)\|\,P(Z\mid X)\right) = \int Q(z\mid X)\log\frac{Q(z\mid X)}{P(z\mid X)}dz$$
+$$KL\left(Q(Z\mid X)\|\ P(Z\mid X)\right) = \int Q(z\mid X)\log\frac{Q(z\mid X)}{P(z\mid X)}dz$$
 
 Expanding the true posterior inside the logarithm:
 
@@ -88,11 +88,11 @@ we obtain:
 
 
 $$
-KL(Q(Z\mid X)\,\|\,P(Z\mid X)) = \int Q(z\mid X)\log\frac{Q(z\mid X)}{P(z,X)}\,dz + \log P(X)$$
+KL(Q(Z\mid X)\ \|\ P(Z\mid X)) = \int Q(z\mid X)\log\frac{Q(z\mid X)}{P(z,X)}\,dz + \log P(X)$$
 
 The first term is the one we want to minimize. Let us focus on it:
 
-$$\int Q(z\mid X)\log\frac{Q(z\mid X)}{P(z,X)}\,dz
+$$\int Q(z\mid X)\log\frac{Q(z\mid X)}{P(z,X)}\ dz
 = \mathbb{E}_{Q(Z\mid X)}\ \left[\log\frac{Q(Z\mid X)}{P(Z,X)}\right]$$
 
 
@@ -122,7 +122,7 @@ This can be rewritten as:
 $$
 \mathcal{L}
 = \mathbb{E}_{Q(Z\mid X)}[\log P(X\mid Z)]
-- KL\!\left(Q(Z\mid X)\,\|\,P(Z)\right).
+- KL\ \left(Q(Z\mid X)\ \|\ P(Z)\right).
 $$
 
 
@@ -133,7 +133,7 @@ From the earlier identity:
 
 
 $$
-KL(Q(Z\mid X)\,\|\,P(Z\mid X)) = \log P(X) - \mathcal{L},
+KL(Q(Z\mid X)\ \|\ P(Z\mid X)) = \log P(X) - \mathcal{L},
 $$
 
 
@@ -141,7 +141,7 @@ we obtain:
 
 
 $$
-\log P(X) = \mathcal{L} + KL(Q(Z\mid X)\,\|\,P(Z\mid X)).
+\log P(X) = \mathcal{L} + KL(Q(Z\mid X)\ \|\ P(Z\mid X)).
 $$
 
 
@@ -150,7 +150,7 @@ Since the KL divergence is always non-negative:
 
 
 $$
-\mathcal{L} \le \log P(X),
+\mathcal{L} \le \log P(X)
 $$
 
 
@@ -165,7 +165,7 @@ $$
 \boxed{
 \mathcal{L}
 = \mathbb{E}_{Q(Z\mid X)}[\log P(X\mid Z)]
-- KL\!\left(Q(Z\mid X)\,\|\,P(Z)\right)
+- KL\ \left(Q(Z\mid X)\ \|\ P(Z)\right)
 }
 $$
 
