@@ -88,7 +88,7 @@ we obtain:
 
 
 $$
-KL(Q(Z\mid X)\ \|\ P(Z\mid X)) = \int Q(z\mid X)\log\frac{Q(z\mid X)}{P(z,X)}\,dz + \log P(X)$$
+KL(Q(Z\mid X)\ \|\ P(Z\mid X)) = \int Q(z\mid X)\log\frac{Q(z\mid X)}{P(z,X)}\ dz + \log P(X)$$
 
 The first term is the one we want to minimize. Let us focus on it:
 
@@ -109,21 +109,14 @@ $$
 We now introduce the variational lower bound (ELBO) by maximizing the negative of this expression:
 
 
-$$
-\mathcal{L}
-= \mathbb{E}_{Q(Z\mid X)}\ \left[\log P(X\mid Z) + \log\frac{P(Z)}{Q(Z\mid X)}\right]
-$$
+$$\mathcal{L} = \mathbb{E}_{Q(Z\mid X)}\ \left[\log P(X\mid Z) + \log\frac{P(Z)}{Q(Z\mid X)}\right]$$
 
 
 
 This can be rewritten as:
 
 
-$$
-\mathcal{L}
-= \mathbb{E}_{Q(Z\mid X)}[\log P(X\mid Z)]
-- KL\ \left(Q(Z\mid X)\ \|\ P(Z)\right).
-$$
+$$ \mathcal{L} = \mathbb{E}_{Q(Z\mid X)}[\log P(X\mid Z)] - KL\ \left(Q(Z\mid X)\ \|\ P(Z)\right)$$
 
 
 
@@ -132,26 +125,20 @@ The first term is the reconstruction term, and the second term is a regularizati
 From the earlier identity:
 
 
-$$
-KL(Q(Z\mid X)\ \|\ P(Z\mid X)) = \log P(X) - \mathcal{L},
-$$
+$$ KL(Q(Z\mid X)\ \|\ P(Z\mid X)) = \log P(X) - \mathcal{L} $$
 
 
 we obtain:
 
 
-$$
-\log P(X) = \mathcal{L} + KL(Q(Z\mid X)\ \|\ P(Z\mid X)).
-$$
+$$ \log P(X) = \mathcal{L} + KL(Q(Z\mid X)\ \|\ P(Z\mid X)) $$
 
 
 
 Since the KL divergence is always non-negative:
 
 
-$$
-\mathcal{L} \le \log P(X)
-$$
+$$ \mathcal{L} \le \log P(X) $$
 
 
 so $\mathcal{L}$ is indeed a lower bound on the log-likelihood.
@@ -161,13 +148,11 @@ Thus, maximizing $\mathcal{L}$ increases $\log P(X)$, meaning the model better e
 Finally, the VAE objective is:
 
 
-$$
-\boxed{
+$$ \boxed{
 \mathcal{L}
 = \mathbb{E}_{Q(Z\mid X)}[\log P(X\mid Z)]
 - KL\ \left(Q(Z\mid X)\ \|\ P(Z)\right)
-}
-$$
+} $$
 
 
 
