@@ -151,77 +151,47 @@ Finally, the VAE objective is:
 $$ \boxed{\mathcal{L}= \mathbb{E}_{Q(Z\mid X)}[\log P(X\mid Z)]- KL\ \left(Q(Z\mid X)\ \|\ P(Z)\right)} $$
 
 
+The first term corresponds to the reconstruction error (in practice: MSE or cross-entropy),
+and the second term is the KL regularization term.  
+For a Gaussian latent distribution, the KL divergence has a closed form:
+
+$$
+KL\!\left(Q(Z\mid X)\,\|\,\mathcal{N}(0,1)\right)
+= -\frac{1}{2}\left(1 + \log(\sigma_q^2) - \mu_q^2 - \sigma_q^2\right).
+$$
+
+\bigskip
+
+## Reparameterization trick
+During backpropagation, we need to compute gradients, which requires all operations
+to be differentiable. However, sampling
+$$
+Z \sim \mathcal{N}(\mu_q, \sigma_q^2)
+$$
+is not differentiable with respect to $\mu_q$ and $\sigma_q$.
+
+To make $Z$ differentiable, we rewrite the sampling step as:
+
+$$
+Z = \mu_q + \sigma_q\,\epsilon,
+$$
+
+where
+
+$$
+\epsilon \sim \mathcal{N}(0,1).
+$$
+
+In this form, the randomness is isolated in $\epsilon$, and $Z$ becomes a differentiable
+function of $(\mu_q, \sigma_q)$, allowing gradients to flow through the latent variable.
+
+
+
+
+
 
 The first term corresponds to the reconstruction error (in practice: MSE or cross-entropy),  
-and the second term is the KL regularization term.
-
-
-
-What we want to compute is : 
-
-$$P(Z|X) = \frac{P(Z,X)}{P(X)} = \frac{P(X|Z)P(Z)}{\int_ZP(X,z)dz}$$
-
-but $\int_ZP(X,z)dz$ is not tractable, because we will need to compute it for every value of $Z$, the latter can be highly dimentional. 
-
-So the solution is to approximate the "posterior" with another distribution : $Q(Z)$.
-
-To mesure the error that we will make from this approximation we will use the Kulback Leibler divergence : 
-
-$$KL(Q(Z|X) | P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z|X)}$$
-
-It tells us the amount of information in bits needed to distore $Q$ to $P$.
-
-$$KL(Q(Z|X) | P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)P(X)}{P(z,X)} = \sum_{z \in Z} Q(z|X)\left[log\frac{Q(z|X)}{P(z,X)} + log P(X)\right] $$
-
-$$KL(Q(Z|X) | P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + \sum_{z \in Z} Q(z|X)log P(X)$$
-
-
-$$KL(Q(Z|X) | P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + log P(X)\sum_{z \in Z} Q(z|X)$$
-
-
-$$KL(Q(Z|X) | P(Z|X) ) = \sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} + log P(X)$$
-
-On the equation above, the first term is the term that we will want to minimize. So let's focus on this first term :
-
-$$\sum_{z \in Z} Q(z|X)log\frac{Q(z|X)}{P(z,X)} = \mathbb{E}_{Q(Z|x)}\left[log\frac{Q(Z|x)}{P(Z,x)}\right]$$
-
-$$\mathbb{E}_{Q(Z|X)} \left[ \log \frac{Q(Z|X)}{P(X, S)} \right]  $$ 
-
-$$ \mathbb{E}_{Q(Z|X)} \left[ \log Q(Z|X) - \log P(X|Z) - \log P(Z) \right]$$
-
-
-We want to minimize this term, so maximize the opposit :
-
-$$\text{maximize} \mathcal{L} = - \sum_Z Q(Z|x)log\frac{Q(Z|x)}{P(Z,x)} = \mathbb{E}_{Q(Z|x)}\left[log P(x|Z) + log\frac{P(Z)}{Q(Z|X)}\right]$$
-
-
-$\mathcal{L}$ is the variational lower bond.
-
-Moreover : 
-
-$$\mathcal{L} = \mathbb{E}_{Q(Z|X)} \left[log P(X|Z) + log\frac{P(Z)}{Q(Z|X)}\right] $$
-
-$$\mathcal{L} = \mathbb{E}_{Q(Z|X)}\left[log P(X|Z)\right] + \sum_Z Q(Z|X) log \frac{P(Z)}{Q(Z|X)}$$
-
-
-
-
-$$\mathcal{L} = \mathbb{E}_{Q(Z|x)}\left[log P(x|Z) \right] - KL\left(Q(Z|X)||P(Z)\right)$$
-
-With what we had earlier we then have : 
-
-$$KL(Q(Z|x)||P(Z|X)) = log P(X) - \mathcal{L} = log P(X) - \left(\mathbb{E}_{Q(Z|X)} \left[log P(X|Z) - KL(Q(Z|X)||P(Z)) \right]\right)$$
-
-So :
-
-$$log P(X) = \mathcal{L} + KL(Q(Z|X)||P(Z|x))$$
-
-We want to maximize $log P(X)$, which is the log likelihood of the data. And $\mathcal{L}$ is the lowerbond of $logP(X)$. If $\mathcal{L}$ increases, the better you describe your data, because $P(X)$ increases. So we want to maximize the $\mathcal{L}$ term.
-
-$$\mathcal{L} = \mathbb{E}_{Q(Z|X)} \left[log P(X|Z) \right] - KL (Q(Z|X)||P(Z))$$
-
-The first term is negative, it reprsents the reconstruction error in our case it will be the MSE. The second term is the regularization term.
-
+and the second term is the KL regularization term. For a gaussian distribution, the 
 
 $$KL(Q(Z|X)||\mathcal{N}(0,1)) = - \frac{1}{2}\left[-\sigma_q^2 - \mu_q^2 + 1 + log(\sigma_q^2)\right]$$
 
