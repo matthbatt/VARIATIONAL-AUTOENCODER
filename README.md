@@ -52,11 +52,22 @@ We have 3 distribution :
 
         
 What we want to compute is the true posterior:
+
+
 $$P(Z \mid X) = \frac{P(Z,X)}{P(X)} = \frac{P(X \mid Z)P(Z)}{\int_Z P(X,z)dz}$$
+
+
 However, the term
+
+
 $$\int_Z P(X,z)dz$$
+
+
 is intractable, because it requires integrating over all possible values of $Z$, which is typically high-dimensional.
+
+
 To bypass this difficulty, we introduce an approximate posterior distribution $Q(Z \mid X)$.
+
 
 To measure how close this approximation is to the true posterior, we use the Kullback--Leibler divergence:
 
