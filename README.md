@@ -148,11 +148,7 @@ Thus, maximizing $\mathcal{L}$ increases $\log P(X)$, meaning the model better e
 Finally, the VAE objective is:
 
 
-$$ \boxed{
-\mathcal{L}
-= \mathbb{E}_{Q(Z\mid X)}[\log P(X\mid Z)]
-- KL\ \left(Q(Z\mid X)\ \|\ P(Z)\right)
-} $$
+$$ \boxed{\mathcal{L}= \mathbb{E}_{Q(Z\mid X)}[\log P(X\mid Z)]- KL\ \left(Q(Z\mid X)\ \|\ P(Z)\right)} $$
 
 
 
